@@ -7,7 +7,7 @@ export function call(api, method, request){
     });
     const accessToken = localStorage.getItem("ACCESS_TOKEN");
     if(accessToken && accessToken !== null){
-        headers.append("Authorization", "Bearer" + accessToken);
+        headers.append("Authorization", "Bearer " + accessToken);
     }
     let options = {
         headers: headers,
@@ -27,9 +27,7 @@ export function call(api, method, request){
         })
     )
     .catch((error) => {
-        console.log(error);
-        console.log(error.status);
-        if(error.status === 403){
+        if(ACCESS_TOKEN === null){
             window.location.href = "/login";
         }
         return Promise.reject(error);
